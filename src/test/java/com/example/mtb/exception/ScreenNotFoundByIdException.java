@@ -3,11 +3,11 @@ package com.example.mtb.exception;
 import lombok.Getter;
 
 @Getter
-public class TheaterNotFoundByIdException extends RuntimeException {
+public class ScreenNotFoundByIdException extends RuntimeException {
 
     private String message;
 
-    public TheaterNotFoundByIdException(String message) {
+    public ScreenNotFoundByIdException(String message) {
         this.message = message;
     }
 }

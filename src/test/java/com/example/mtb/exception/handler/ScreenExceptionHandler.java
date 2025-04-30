@@ -1,6 +1,7 @@
 package com.example.mtb.exception.handler;
 
-import com.example.mtb.exception.TheaterNotFoundByIdException;
+import com.example.mtb.exception.NoOfRowsExceedCapacityException;
+import com.example.mtb.exception.ScreenNotFoundByIdException;
 import com.example.mtb.util.ErrorStructure;
 import com.example.mtb.util.RestResponseBuilder;
 import lombok.AllArgsConstructor;
@@ -11,12 +12,19 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 @AllArgsConstructor
-public class TheaterExceptionHandler {
+public class ScreenExceptionHandler {
 
     private final RestResponseBuilder responseBuilder;
 
     @ExceptionHandler
-    public ResponseEntity<ErrorStructure> handleTheaterNotFoundByIdException(TheaterNotFoundByIdException ex) {
+    public ResponseEntity<ErrorStructure> handleNoOfRowsExceedCapacityException(NoOfRowsExceedCapacityException ex) {
+        return responseBuilder.error(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorStructure> handleScreenNotFoundByIdException(ScreenNotFoundByIdException ex) {
         return responseBuilder.error(HttpStatus.NOT_FOUND, ex.getMessage());
     }
+
+
 }
