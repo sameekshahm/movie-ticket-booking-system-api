@@ -6,6 +6,7 @@ import com.example.mtb.entity.Screen;
 import com.example.mtb.entity.Seat;
 import org.springframework.stereotype.Component;
 
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,21 +21,23 @@ public class ScreenMapper {
                 screen.getScreenType(),
                 screen.getCapacity(),
                 screen.getNoOfRows(),
-                seatResposeMapper(screen.getSeats())
+                seatResponseMapper(screen.getSeats())
 
         );
     }
 
-    private SeatResponse seatResposeMapper (List<Seat> seats){
-        List<String> seatId = new LinkedList<>();
-        List<String> seatName = new LinkedList<>();
-        for (Seat seat : seats){
-            seatId.add(seat.getSeatId());
-            seatName.add(seat.getName());
+    private List<SeatResponse> seatResponseMapper(List<Seat> seats) {
+        List<SeatResponse> seatList = new LinkedList<>();
+        for (Seat seat : seats) {
+
+            seatList.add(SeatResponse.builder()
+                    .seatId(seat.getSeatId())
+                    .name(seat.getName())
+                    .build());
         }
-        return SeatResponse.builder()
-                .name(seatName)
-                .seatId(seatId)
-                .build();
+        return seatList;
+
+
+
     }
 }

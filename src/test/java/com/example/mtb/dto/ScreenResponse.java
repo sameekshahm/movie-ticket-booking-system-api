@@ -1,7 +1,11 @@
 package com.example.mtb.dto;
 
+import com.example.mtb.entity.Seat;
 import com.example.mtb.enums.ScreenType;
 import lombok.Builder;
+
+import java.util.LinkedHashMap;
+import java.util.List;
 
 @Builder
 public record ScreenResponse(
@@ -10,7 +14,7 @@ public record ScreenResponse(
         ScreenType screenType,
         Integer capacity,
         Integer noOfRows,
-        SeatResponse seats
+        List<SeatResponse> seats
 
 )
 {}

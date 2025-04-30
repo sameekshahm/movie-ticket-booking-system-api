@@ -8,6 +8,9 @@ import com.example.mtb.entity.Theater;
 import com.example.mtb.exception.NoOfRowsExceedCapacityException;
 import com.example.mtb.exception.ScreenNotFoundByIdException;
 import com.example.mtb.exception.TheaterNotFoundByIdException;
+import com.example.mtb.exception.NoOfRowsExceedCapacityException;
+import com.example.mtb.exception.ScreenNotFoundByIdException;
+import com.example.mtb.exception.TheaterNotFoundByIdException;
 import com.example.mtb.mapper.ScreenMapper;
 import com.example.mtb.repository.ScreenRepository;
 import com.example.mtb.repository.SeatRepository;
@@ -16,6 +19,7 @@ import com.example.mtb.service.ScreenService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -43,14 +47,16 @@ public class ScreenServiceImpl implements ScreenService {
 
     @Override
     public ScreenResponse findScreen(String theaterId, String screenId) {
-        if(theaterRepository.existsById(theaterId)){
-            if(screenRepository.existsById(screenId)){
+        if (theaterRepository.existsById(theaterId)) {
+            if (screenRepository.existsById(screenId)) {
                 return screenMapper.screenResponseMapper(screenRepository.findById(screenId).get());
             }
             throw new ScreenNotFoundByIdException("Screen Not Found by Id");
         }
         throw new TheaterNotFoundByIdException("Theater not found by Id");
     }
+
+
 
     private Screen copy(ScreenRequest screenRequest, Screen screen, Theater theater) {
         screen.setScreenType(screenRequest.screenType());
@@ -71,6 +77,7 @@ public class ScreenServiceImpl implements ScreenService {
         for (int i = 1, j = 1; i <= capacity; i++, j++) {
             Seat seat = new Seat();
             seat.setScreen(screen);
+            seat.setIsDelete(false);
             seat.setName(row + "" + j);
             seatRepository.save(seat);
             seats.add(seat);
@@ -81,5 +88,9 @@ public class ScreenServiceImpl implements ScreenService {
         }
         return seats;
     }
+
+
+
+
 
 }
