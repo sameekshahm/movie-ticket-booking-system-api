@@ -3,10 +3,11 @@ package com.example.mtb.dto;
 import lombok.Builder;
 
 import java.util.List;
+import java.util.Map;
 
 @Builder
-public record SeatResponse(
-        List<String> seatId,
-        List<String> name
+public record SeatResponse (
+        String seatId,
+        String name
 )
 {}
