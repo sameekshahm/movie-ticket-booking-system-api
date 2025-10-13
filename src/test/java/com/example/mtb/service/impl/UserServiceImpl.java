@@ -6,10 +6,8 @@ import com.example.mtb.dto.UserUpdationRequest;
 import com.example.mtb.entity.TheaterOwner;
 import com.example.mtb.entity.User;
 import com.example.mtb.entity.UserDetails;
-import com.example.mtb.exception.UserExistByEmailException;
-import com.example.mtb.exception.UserNotFoundByEmailException;
-import com.example.mtb.exception.UserExistByEmailException;
-import com.example.mtb.exception.UserNotFoundByEmailException;
+import com.example.mtb.exceptions.UserExistByEmailException;
+import com.example.mtb.exceptions.UserNotFoundByEmailException;
 import com.example.mtb.mapper.UserDetailsMapper;
 import com.example.mtb.repository.UserRepository;
 import com.example.mtb.security.SecurityConfig;
@@ -66,7 +64,7 @@ public class UserServiceImpl implements UserService {
         if (userRepository.existsByEmail(email)) {
             UserDetails user = userRepository.findByEmail(email);
             user.setDelete(true);
-            user.setDeletedAt(LocalDateTime.now());
+            user.setDeletedAt(Instant.now());
             userRepository.save(user);
             return userMapper.userDetailsResponseMapper(user);
         }

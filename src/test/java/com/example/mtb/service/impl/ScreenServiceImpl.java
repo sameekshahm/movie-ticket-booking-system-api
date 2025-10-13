@@ -5,12 +5,9 @@ import com.example.mtb.dto.ScreenResponse;
 import com.example.mtb.entity.Screen;
 import com.example.mtb.entity.Seat;
 import com.example.mtb.entity.Theater;
-import com.example.mtb.exception.NoOfRowsExceedCapacityException;
-import com.example.mtb.exception.ScreenNotFoundByIdException;
-import com.example.mtb.exception.TheaterNotFoundByIdException;
-import com.example.mtb.exception.NoOfRowsExceedCapacityException;
-import com.example.mtb.exception.ScreenNotFoundByIdException;
-import com.example.mtb.exception.TheaterNotFoundByIdException;
+import com.example.mtb.exceptions.NoOfRowsExceedCapacityException;
+import com.example.mtb.exceptions.ScreenNotFoundByIdException;
+import com.example.mtb.exceptions.TheaterNotFoundByIdException;
 import com.example.mtb.mapper.ScreenMapper;
 import com.example.mtb.repository.ScreenRepository;
 import com.example.mtb.repository.SeatRepository;
@@ -77,7 +74,7 @@ public class ScreenServiceImpl implements ScreenService {
         for (int i = 1, j = 1; i <= capacity; i++, j++) {
             Seat seat = new Seat();
             seat.setScreen(screen);
-            seat.setIsDelete(false);
+            seat.setDelete(false);
             seat.setName(row + "" + j);
             seatRepository.save(seat);
             seats.add(seat);

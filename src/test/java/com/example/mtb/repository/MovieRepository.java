@@ -1,4 +1,7 @@
 package com.example.mtb.repository;
 
-public interface MovieRepository {
+import com.example.mtb.entity.movie;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MovieRepository extends JpaRepository<movie,String>{
 }
